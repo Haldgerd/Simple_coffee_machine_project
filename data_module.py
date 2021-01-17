@@ -8,6 +8,7 @@ MENU = {  # contains nested dictionary. Each separate dictionary has two keys.
     "espresso": {  # espresso as main key
         "ingredients": {
             "water": 50,
+            "milk": 0,
             "coffee": 18,
         },
         "cost": 1.5,
@@ -31,8 +32,18 @@ MENU = {  # contains nested dictionary. Each separate dictionary has two keys.
 }
 
 resources = {
-    "water": 300,
-    "milk": 200,
+    "water": 400,
+    "milk": 300,
     "coffee": 100,
+    "money": 0,
 }
+# copy of original resources in case of restoring default values.
+resource_stash = resources
 
+new_data = list(MENU["latte"]["ingredients"].values())
+print(new_data)
+
+empty = []
+
+if not empty:
+    print("HI")
