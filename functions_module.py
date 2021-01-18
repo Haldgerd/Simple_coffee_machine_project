@@ -42,7 +42,14 @@ def resource_checker_function(requested_drink):  # parameter should be resource 
         return False
 
 
-# def resource_modifier_function():
+def resource_modifier_function(requested_drink):
+    # print(f"This is{resource_stash}.")  # test line
+    for key in MENU[requested_drink]["ingredients"].keys():
+        if resource_stash[key] == 0:
+            continue
+        else:
+            resource_stash[key] -= MENU[requested_drink]["ingredients"][key]
+    return resource_stash
 
 
 def resource_output_formatter():
@@ -65,11 +72,12 @@ def money_function(requested_drink, euro, cent1, cent2, cent3):
     :param cent3: float
     :return: True, False
     """
-    money_sum = float((euro*1) + (cent1*0.50) + (cent2*0.20) + (cent3*0.10))
+    money_sum = round(float((euro*1) + (cent1*0.50) + (cent2*0.20) + (cent3*0.10)), 2)
     coffee_price = MENU[requested_drink]["cost"]
 
-    resource_stash["money"] += coffee_price
-    if money_sum != coffee_price:
+    resource_stash["money"] += money_sum
+
+    if money_sum < coffee_price:
         print("Sorry not enough money. Money refunded.")
         resource_stash["money"] -= money_sum
         return False
@@ -77,8 +85,8 @@ def money_function(requested_drink, euro, cent1, cent2, cent3):
     if money_sum > coffee_price:
         change = round(money_sum - coffee_price, 2)
         if resource_stash["money"] < change:
-            resource_stash["money"] = 0
             print(f"Sorry, we don't have enough change to return.\nReturning {resource_stash['money']}€.")
+            resource_stash["money"] = 0
         else:
             resource_stash["money"] -= change
             print(f"Here's {change}€ in change.")

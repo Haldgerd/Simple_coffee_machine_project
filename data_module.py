@@ -37,13 +37,11 @@ resources = {
     "coffee": 100,
     "money": 0,
 }
-# copy of original resources in case of restoring default values.
+# copy of original resources in case of restoring to default values.
 resource_stash = resources
 
-new_data = list(MENU["latte"]["ingredients"].values())
-print(new_data)
 
-empty = []
+coffee_price = MENU["espresso"]["cost"]
+print(coffee_price)
 
-if not empty:
-    print("HI")
+print(1 + 2*0.50 + 0.20)
